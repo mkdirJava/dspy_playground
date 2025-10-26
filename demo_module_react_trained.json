@@ -1,0 +1,181 @@
+{
+  "extractor": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "text": "It's a nice day for a walk.",
+        "outputs": {
+          "sentiment": "none",
+          "confidence": 1.0
+        }
+      },
+      {
+        "text": "The horse galloped swiftly through the meadow.",
+        "outputs": {
+          "sentiment": "horse",
+          "confidence": 1.0
+        }
+      },
+      {
+        "text": "I'm feeling really down today.",
+        "outputs": {
+          "sentiment": "mood",
+          "confidence": 1.0
+        }
+      },
+      {
+        "text": "The striker scored a last-minute goal!",
+        "outputs": {
+          "sentiment": "football",
+          "confidence": 1.0
+        }
+      }
+    ],
+    "signature": {
+      "instructions": "Extracts the sentiment domain from text and returns\na structured SentimentResult with a confidence score.",
+      "fields": [
+        {
+          "prefix": "Text:",
+          "description": "Input text to analyze for sentiment"
+        },
+        {
+          "prefix": "Result:",
+          "description": "Extracted sentiment and confidence score"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "chain_of_thought.react": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "text": "The striker scored a last-minute goal!",
+        "outputs": {
+          "sentiment": "football",
+          "confidence": 1.0
+        }
+      },
+      {
+        "text": "The horse galloped swiftly through the meadow.",
+        "outputs": {
+          "sentiment": "horse",
+          "confidence": 1.0
+        }
+      },
+      {
+        "text": "I'm feeling really down today.",
+        "outputs": {
+          "sentiment": "mood",
+          "confidence": 1.0
+        }
+      },
+      {
+        "text": "It's a nice day for a walk.",
+        "outputs": {
+          "sentiment": "none",
+          "confidence": 1.0
+        }
+      }
+    ],
+    "signature": {
+      "instructions": "Please reason briefly and use at most one tool before giving your final answer.\nusing the supplied tools, perform chain of thought reasoning to produce a final answer.\n\nYou are an Agent. In each episode, you will be given the fields `text`, `tools` as input. And you can see your past trajectory so far.\nYour goal is to use one or more of the supplied tools to collect any necessary information for producing `result`.\n\nTo do this, you will interleave next_thought, next_tool_name, and next_tool_args in each turn, and also when finishing the task.\nAfter each tool call, you receive a resulting observation, which gets appended to your trajectory.\n\nWhen writing next_thought, you may reason about the current situation and plan for future steps.\nWhen selecting the next_tool_name and its next_tool_args, the tool must be one of:\n\n(1) _football_api_caller, whose description is <desc>A tool to get football related information from an external API.</desc>. It takes arguments {'query': {'type': 'string', 'description': 'Query string for the football-related API'}}.\n(2) _horse_api_caller, whose description is <desc>A tool to get horse related information from an external API.</desc>. It takes arguments {'query': {'type': 'string', 'description': 'Query string for the horse-related API'}}.\n(3) _mood_api_caller, whose description is <desc>A tool to get mood related information from an external API.</desc>. It takes arguments {'query': {'type': 'string', 'description': 'Query string for the mood-related API'}}.\n(4) finish, whose description is <desc>Marks the task as complete. That is, signals that all information for producing the outputs, i.e. `result`, are now available to be extracted.</desc>. It takes arguments {}.\nWhen providing `next_tool_args`, the value inside the field must be in JSON format",
+      "fields": [
+        {
+          "prefix": "Text:",
+          "description": "Input text to analyze for sentiment"
+        },
+        {
+          "prefix": "Tools:",
+          "description": "List of available tools for use"
+        },
+        {
+          "prefix": "Trajectory:",
+          "description": "${trajectory}"
+        },
+        {
+          "prefix": "Next Thought:",
+          "description": "${next_thought}"
+        },
+        {
+          "prefix": "Next Tool Name:",
+          "description": "${next_tool_name}"
+        },
+        {
+          "prefix": "Next Tool Args:",
+          "description": "${next_tool_args}"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "chain_of_thought.extract.predict": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "text": "I'm feeling really down today.",
+        "outputs": {
+          "sentiment": "mood",
+          "confidence": 1.0
+        }
+      },
+      {
+        "text": "It's a nice day for a walk.",
+        "outputs": {
+          "sentiment": "none",
+          "confidence": 1.0
+        }
+      },
+      {
+        "text": "The striker scored a last-minute goal!",
+        "outputs": {
+          "sentiment": "football",
+          "confidence": 1.0
+        }
+      },
+      {
+        "text": "The horse galloped swiftly through the meadow.",
+        "outputs": {
+          "sentiment": "horse",
+          "confidence": 1.0
+        }
+      }
+    ],
+    "signature": {
+      "instructions": "Please reason briefly and use at most one tool before giving your final answer.\nusing the supplied tools, perform chain of thought reasoning to produce a final answer.",
+      "fields": [
+        {
+          "prefix": "Text:",
+          "description": "Input text to analyze for sentiment"
+        },
+        {
+          "prefix": "Tools:",
+          "description": "List of available tools for use"
+        },
+        {
+          "prefix": "Trajectory:",
+          "description": "${trajectory}"
+        },
+        {
+          "prefix": "Reasoning: Let's think step by step in order to",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Result:",
+          "description": "summarized final response after using chain of thought reasoning with the tools"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.13",
+      "dspy": "3.0.3",
+      "cloudpickle": "3.1"
+    }
+  }
+}
