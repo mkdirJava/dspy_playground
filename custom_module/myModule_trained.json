@@ -1,0 +1,59 @@
+{
+  "extractor": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "augmented": true,
+        "text": "homework",
+        "textLength": 8
+      },
+      {
+        "augmented": true,
+        "text": "DSPy",
+        "textLength": 4
+      },
+      {
+        "text": "DSPy helps modularize AI workflows.",
+        "textLength": 31
+      },
+      {
+        "text": "Another example with more characters.",
+        "textLength": 33
+      },
+      {
+        "text": "A short one.",
+        "textLength": 10
+      },
+      {
+        "text": "ChatGPT is great for prototyping.",
+        "textLength": 29
+      },
+      {
+        "text": "I love machine learning.",
+        "textLength": 21
+      }
+    ],
+    "signature": {
+      "instructions": "Take the text and get the length of the text. Include white spaces",
+      "fields": [
+        {
+          "prefix": "Text:",
+          "description": "${text}"
+        },
+        {
+          "prefix": "Text Length:",
+          "description": "${textLength}"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.13",
+      "dspy": "3.0.3",
+      "cloudpickle": "3.1"
+    }
+  }
+}
